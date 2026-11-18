@@ -1,0 +1,19 @@
+{
+  "name": "rideshare-cloud",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite --host 0.0.0.0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "@supabase/supabase-js": "2.57.0"
+  },
+  "devDependencies": {
+    "vite": "6.1.0"
+  }
+}
