@@ -2,7 +2,10 @@
 import React,{useState,useEffect,useRef} from 'react';
 import{createRoot}from'react-dom/client';
 import{createClient}from'@supabase/supabase-js';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import'./style.css';
+window.L=L;
 const sb=createClient('https://ebnkhhnjrsgryezlxvjz.supabase.co','sb_publishable_K4Hdq2L_HBXLfSiYHs12sw_WRAhFWP6');
 const fmt=n=>'₹'+Math.round(Number(n)||0).toLocaleString('en-IN');
 function App(){
