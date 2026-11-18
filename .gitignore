@@ -1,0 +1,14 @@
+node_modules/
+frontend/dist/
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+*.exe
+*.dll
+*.pyc
+__pycache__/
+.vercel/
+.DS_Store
