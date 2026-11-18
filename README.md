@@ -1,19 +1,39 @@
-# RideShare — Route-Based Carpooling
+# RideShare — Intelligent Route-Based Carpooling
 
-RideShare is a driver-first carpooling application with GPS-based matching, fare estimates, ride tracking, and RideTrust audit features.
+**Cloud pilot live:** https://rideshare-carpooling-eight.vercel.app
 
-## Deployment status
+RideShare is a driver-first carpooling app. Drivers share seats on trips they already plan to take; passengers choose pickup/drop GPS points, see a fare estimate, and request a compatible seat. Matching prioritizes forward-direction on-route stops, then nearby detours.
 
-- Supabase project: `ebnkhhnjrsgryezlxvjz` — database tables created and RLS enabled.
-- Vercel project: `rasna3/rideshare-carpooling` — created, not deployed.
-- Application source must be uploaded before deployment.
-- The existing C++/SQLite backend **has not yet been migrated** to the Supabase PostgreSQL database. A frontend-only deployment cannot provide working login or booking.
+## Connected cloud services
+- **Frontend**: React + Vite, deployed on Vercel under RASNA
+- **GitHub**: https://github.com/nitishkulkarni07/rideshare
+- **Database/Auth**: dedicated Supabase PostgreSQL project `ebnkhhnjrsgryezlxvjz`
+- **Map/routing**: Leaflet/OpenStreetMap; OSRM demo routing with an estimated-distance fallback
+- **Security**: Supabase Auth and RLS on six ride-related tables; server-validated booking/acceptance RPCs
 
-## Repository layout after source upload
+## Run locally
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-- `frontend/`: React/Vite web application
-- `backend/`: current Windows C++ backend, for migration
-- `supabase/`: PostgreSQL schema / migrations
-- `tests/`: integration tests
+## Current cloud features
+Passenger / driver sign-up and login, interactive GPS map, distance and estimated fare, payment preference (demo only), driver journey publishing, on-route-first/nearby-second matching, driver acceptance, ride status, GPS updates while browser is active, manual completion with a reason, rating/feedback and ride audit download.
 
-Do not commit `.env`, database passwords, API secrets, or local SQLite files. Online payment flows are demos, not actual payment gateway transactions.
+## Scope and limitations
+This repository currently contains the **cloud-adapted pilot frontend**, **not the full original Windows C++/SQLite source**. The earlier Windows code remains in the RideShare ZIP shared in ChatGPT. This cloud pilot does not yet have:
+- Verified automatic completion based on repeated destination GPS readings
+- Road-polyline matching (current match server checks a straight-line corridor)
+- Multiple simultaneous accepted passengers in one vehicle
+- Real UPI, net banking or wallet payments
+- Guaranteed GPS in the background or live-traffic optimized navigation
+- Full end-to-end two-device verification
+
+Build and static HTTP checks passed. Perform two-device authentication, trip, and persistence testing before accepting real customers.
+
+## Deployment
+Vercel project: https://vercel.com/rasna3/rideshare-carpooling
+Project Root Directory: `frontend`; Build Command: `npm run build`; Output Directory: `dist`.
+A production build was created from GitHub commit `b584e49`. A permanent Git integration for automatic deployments was not independently confirmed.
+Do not put Supabase secret/service_role keys in frontend code.
